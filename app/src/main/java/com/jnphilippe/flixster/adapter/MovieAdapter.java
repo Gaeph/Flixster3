@@ -1,6 +1,7 @@
 package com.jnphilippe.flixster.adapter;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +21,10 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
     Context context;
     List<Movie> movies;
-    public MovieAdapter(Context context, List<Movie> movies){
-        this.context=context;
-        this.movies=movies;
+
+    public MovieAdapter(Context context, List<Movie> movies) {
+        this.context = context;
+        this.movies = movies;
     }
 
     // Involve populating data into into the item through holder
@@ -30,16 +32,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("MovieAdapter","onCreateViewHolder");
+        Log.d("MovieAdapter", "onCreateViewHolder");
         View movieView = LayoutInflater.from(context).inflate(R.layout.item_movies, parent, false);
         return new ViewHolder(movieView);
     }
-// Involve populating data into into the item through holder
+
+    // Involve populating data into into the item through holder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("MovieAdapter","onBindViewHolder" +position);
+        Log.d("MovieAdapter", "onBindViewHolder" + position);
 // Get the movies at the passed in the position
-        Movie movie =movies.get(position);
+        Movie movie = movies.get(position);
         //Bind the movie data into the VH
         holder.bind(movie);
     }
@@ -50,11 +53,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return movies.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle;
-                TextView tvOverview;
-                        ImageView ivPoster;
+        TextView tvOverview;
+        ImageView ivPoster;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,7 +69,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         public void bind(Movie movie) {
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
-            Glide.with(context).load(movie.getPosterPath()).into(ivPoster);
+            String imageUrl;
+            // if phone is in landscape
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                imageUrl = movie.getBackdropPath();
+            } else
+            {
+                // then imageUrl = back drop image
+                imageUrl = movie.getBackdropPath();
+                //else imageUrl = poster image
+                imageUrl =movie.getPosterPath();
+
+            }
+            Glide.with(context).load(imageUrl).into(ivPoster);
 
         }
     }
