@@ -6,12 +6,17 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+@Parcel
 
 public class Movie {
     String backdropPath;
     String posterPath;
     String title;
     String overview;
+    //empty construst
+    public Movie(){
+
+    }
 
     public Movie(JSONObject jsonObject) throws JSONException {
         backdropPath = jsonObject.getString("backdrop_path");

@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/617/Flixster2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/617/Flixster2/app/src/main/res/layout-land/item_movies.xml" value="0.25" />
+        <entry key="..\:/Users/617/Flixster2/app/src/main/res/layout/activity_detail.xml" value="0.25" />
         <entry key="..\:/Users/617/Flixster2/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/617/Flixster2/app/src/main/res/layout/item_movies.xml" value="0.19166666666666668" />
       </map>
