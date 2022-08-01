@@ -83,7 +83,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             } else
             {
                 // then imageUrl = back drop image
-                imageUrl = movie.getBackdropPath();
+                //imageUrl = movie.getBackdropPath();
                 //else imageUrl = poster image
                 imageUrl =movie.getPosterPath();
 
@@ -95,10 +95,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 public void onClick(View view) {
                   // 2. Navigate to a new actity on tap
                     Intent i = new Intent(context, DetailActivity.class);
-                    i.putExtra("movie", Parcels.wrap(movie));
+                    //i.putExtra("movie", Parcels.wrap(movie));
                     context.startActivity(i);
                 }
             });
-        }
+          }
     }
 }
