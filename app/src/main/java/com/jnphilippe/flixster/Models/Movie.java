@@ -13,14 +13,15 @@ import java.util.List;
 @Parcel
 public
 class Movie {
+    int id;
     String backdropPath;
     String posterPath;
     String title;
     String overview;
     double rating;
 
-     // empty constructor needed by the Parceler library
-    public Movie(){
+    // empty constructor needed by the Parceler library
+    public Movie() {
 
     }
 
@@ -29,16 +30,18 @@ class Movie {
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
-rating = jsonObject.getDouble("vote_average");
+        rating = jsonObject.getDouble("vote_average");
+        id = jsonObject.getInt("id");
     }
 
     @NonNull
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException {
-        List<Movie> movies =new ArrayList<>();
-        for(int i=0; i<movieJsonArray.length(); i++){
+        List<Movie> movies = new ArrayList<>();
+        for (int i = 0; i < movieJsonArray.length(); i++)
             movies.add(new Movie(movieJsonArray.getJSONObject(i)));
-    }
-        return movies;
+
+
+    return movies;
 }
 
     public String getPosterPath() {
@@ -60,4 +63,8 @@ rating = jsonObject.getDouble("vote_average");
     public double getRating() {
         return rating;
     }
+
+public int getMovieId(){
+    return id;
+}
 }

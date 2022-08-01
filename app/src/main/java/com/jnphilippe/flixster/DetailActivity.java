@@ -45,7 +45,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         ratingBar.setRating((float) movie.getRating());
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(String.format(VIDEO_URL,209112) ,new JsonHttpResponseHandler() {
+        client.get(String.format(VIDEO_URL,movie.getMovieId()) ,new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 try {
@@ -55,6 +55,7 @@ public class DetailActivity extends YouTubeBaseActivity {
                     }
                     String youtubeKey = results.getJSONObject(0).getString("key");
                     Log.d("DetailActivity",youtubeKey);
+                    initializeYoutube(youtubeKey);
                 } catch (JSONException e) {
                     Log.e("DetailActivity","Failed to parse JSON", e);
 
@@ -66,17 +67,20 @@ public class DetailActivity extends YouTubeBaseActivity {
 
             }
         });
-        youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                Log.d("DetailActivity" ,"onInitializationSuccess");
-                youTubePlayer.loadVideo("5xVh-7ywKpE");
-            }
 
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                Log.d("DetailActivity" ,"onInitializationFailure");
-            }
-        });
+    }
+
+    private void initializeYoutube(String youtubeKey) { youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
+        @Override
+        public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+            Log.d("DetailActivity" ,"onInitializationSuccess");
+            youTubePlayer.loadVideo(youtubeKey);
+        }
+
+        @Override
+        public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+            Log.d("DetailActivity" ,"onInitializationFailure");
+        }
+    });
     }
 }
