@@ -1,0 +1,22 @@
+eksplikasyon
+Oncreate
+onPause 
+onResume
+onDestroy
+
+
+
+Un Contexte 
+
+Un contexte donne accès à des informations sur l'état de l'application. Il fournit aux activités, fragments et services un accès aux fichiers de ressources, aux images, aux thèmes/styles et aux emplacements de répertoires externes. Il permet également d'accéder aux services intégrés d'Android, tels que ceux utilisés pour l'inflation de la mise en page, le clavier et la recherche de fournisseurs de contenu.
+
+
+Nous utilisons le contexte pour récupérer le LayoutInflaterafin de gonfler une mise en page XML en mémoire :
+
+Le contexte d'application est généralement utilisé lorsque des instances singleton doivent être créées, comme une classe de gestionnaire personnalisée qui nécessite des informations de contexte pour accéder aux services système, mais qui est réutilisée dans plusieurs activités. Étant donné que la conservation d'une référence au contexte d'activité empêcherait la récupération de la mémoire après son exécution, il est important d'utiliser le contexte d'application à la place.
+
+Pour éviter les fuites de mémoire, ne conservez jamais une référence à un contexte au-delà de son cycle de vie. Vérifiez tous vos threads d'arrière-plan, les gestionnaires en attente ou les classes internes qui peuvent également contenir des objets de contexte.
+
+La bonne méthode consiste à stocker le contexte de l'application dans CustomManager.getInstance(). Le contexte de l'application est un singleton et est lié à la durée de vie du processus de l'application, ce qui permet de stocker en toute sécurité une référence à celui-ci.
+
+Utilisez le contexte d'application lorsqu'une référence de contexte est nécessaire au-delà de la durée de vie d'un composant, ou si elle doit être indépendante du cycle de vie du contexte transmis
